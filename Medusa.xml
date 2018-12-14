@@ -1,0 +1,194 @@
+<GuiXml>
+    <Controls>
+        <TopLevelControl name="MedusaWindow" clampedToScreen="true" mouseEnabled="true" movable="true" hidden="false">
+            <Dimensions x="350" y="35" />
+            <Anchor point="TOPLEFT" relativeTo="GuiRoot" relativePoint="CENTER" offsetX="-175" offsetY="-200"/>
+            <OnMoveStop>
+                Medusa.MedusaWindowSaveLoc()
+            </OnMoveStop>
+            <Controls>
+                <Backdrop name="$(parent)Backdrop" edgeColor="00000000" layer="0" level="0" centerColor="EEEEEE" alpha="0.4"  hidden="false">
+                    <Dimensions x="350" y="35" />
+                    <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT"/>
+                    <Edge edgeSize="0" />
+                </Backdrop>
+
+                <StatusBar name="$(parent)StatusBar" layer="0" level="1" color="5BC0DE" alpha="1" hidden="false">
+                    <Dimensions x="350" y="35" />
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="0" offsetY="0"/>
+                    <Limits min="0" max="100" />
+                </StatusBar>
+
+                <Label name="$(parent)Label" font="ZoFontWinH4" color="ffffff" text="" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
+                    <Dimensions x="350" y="35" />
+                    <Anchor point="TOPLEFT"  relativeTo="$(parent)parent" relativePoint="TOPLEFT" offsetX="4" offsetY="-2"/>
+                </Label>
+
+                <Label name="$(parent)LabelTime" font="ZoFontWinH4" color="ffffff" text="" verticalAlignment="CENTER" horizontalAlignment="RIGHT"  alpha="0.85">
+                    <Dimensions x="350" y="35" />
+                    <Anchor point="TOPRIGHT"  relativeTo="$(parent)parent" relativePoint="TOPRIGHT" offsetX="-4" offsetY="-2"/>
+                </Label>
+            </Controls>
+        </TopLevelControl>
+    </Controls>
+    <Controls>
+        <TopLevelControl name="BigPortalWindow" clampedToScreen="true" mouseEnabled="true" movable="true" hidden="false">
+            <Dimensions x="600" y="50" />
+            <Anchor point="TOPLEFT" relativeTo="GuiRoot" relativePoint="CENTER" offsetX="-300" offsetY="-300"/>
+            <OnMoveStop>
+                Medusa.BigPortalWindowSaveLoc()
+            </OnMoveStop>
+            <Controls>
+                <Backdrop name="$(parent)Backdrop" edgeColor="00000000" layer="0" level="0" centerColor="EEEEEE" alpha="0.4"  hidden="false">
+                    <Dimensions x="600" y="50" />
+                    <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT"/>
+                    <Edge edgeSize="0" />
+                </Backdrop>
+
+                <StatusBar name="$(parent)StatusBar" layer="0" level="1" color="283593" alpha="1" hidden="false">
+                    <Dimensions x="600" y="50" />
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="0" offsetY="0"/>
+                    <Limits min="0" max="100" />
+                </StatusBar>
+
+                <Backdrop name="$(parent)Event1" edgeColor="00000000" layer="0" level="2" centerColor="5F5FC4" alpha="1"  hidden="false">
+                    <Dimensions x="1" y="50" />
+                    <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="552" offsetY=""/>
+                    <Edge edgeSize="0" />
+                </Backdrop>
+
+                <Backdrop name="$(parent)Event2" edgeColor="00000000" layer="0" level="2" centerColor="5F5FC4" alpha="1"  hidden="false">
+                    <Dimensions x="1" y="50" />
+                    <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="480" offsetY=""/>
+                    <Edge edgeSize="0" />
+                </Backdrop>
+
+                <Backdrop name="$(parent)Event3" edgeColor="00000000" layer="0" level="2" centerColor="FF5F52" alpha="1"  hidden="false">
+                    <Dimensions x="3" y="50" />
+                    <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="415" offsetY=""/>
+                    <Edge edgeSize="0" />
+                </Backdrop>
+
+                <Backdrop name="$(parent)Event4" edgeColor="00000000" layer="0" level="2" centerColor="5F5FC4" alpha="1"  hidden="false">
+                    <Dimensions x="1" y="50" />
+                    <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="360" offsetY=""/>
+                    <Edge edgeSize="0" />
+                </Backdrop>
+
+                <Backdrop name="$(parent)Event5" edgeColor="00000000" layer="0" level="2" centerColor="5F5FC4" alpha="1"  hidden="false">
+                    <Dimensions x="1" y="50" />
+                    <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="288" offsetY=""/>
+                    <Edge edgeSize="0" />
+                </Backdrop>
+
+                <Backdrop name="$(parent)Event6" edgeColor="00000000" layer="0" level="2" centerColor="5F5FC4" alpha="1"  hidden="false">
+                    <Dimensions x="1" y="50" />
+                    <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="216" offsetY=""/>
+                    <Edge edgeSize="0" />
+                </Backdrop>
+
+                <Backdrop name="$(parent)Event7" edgeColor="00000000" layer="0" level="2" centerColor="FF5F52" alpha="1"  hidden="false">
+                    <Dimensions x="3" y="50" />
+                    <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="159" offsetY=""/>
+                    <Edge edgeSize="0" />
+                </Backdrop>
+
+                <Backdrop name="$(parent)Event8" edgeColor="00000000" layer="0" level="2" centerColor="5F5FC4" alpha="1"  hidden="false">
+                    <Dimensions x="1" y="50" />
+                    <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="112" offsetY=""/>
+                    <Edge edgeSize="0" />
+                </Backdrop>
+
+                <Backdrop name="$(parent)Event9" edgeColor="00000000" layer="0" level="2" centerColor="5F5FC4" alpha="1"  hidden="false">
+                    <Dimensions x="1" y="50" />
+                    <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="50" offsetY=""/>
+                    <Edge edgeSize="0" />
+                </Backdrop>
+
+                <Label name="$(parent)Label" font="ZoFontWinH4" color="ffffff" text="Portal open" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
+                    <Dimensions x="600" y="50" />
+                    <Anchor point="TOPLEFT"  relativeTo="$(parent)parent" relativePoint="TOPLEFT" offsetX="10" offsetY="-2"/>
+                </Label>
+
+                <Label name="$(parent)Label1" font="ZoFontWinH4" color="FF5F52" text="E" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
+                    <Dimensions x="600" y="50" />
+                    <Anchor point="CENTER"  relativeTo="$(parent)parent" relativePoint="CENTER" offsetX="155" offsetY="-40"/>
+                </Label>
+
+                <Label name="$(parent)Label2" font="ZoFontWinH4" color="FF5F52" text="E" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
+                    <Dimensions x="600" y="50" />
+                    <Anchor point="CENTER"  relativeTo="$(parent)parent" relativePoint="CENTER" offsetX="411" offsetY="-40"/>
+                </Label>
+
+                <Label name="$(parent)LabelTime" font="ZoFontWinH4" color="ffffff" text="" verticalAlignment="CENTER" horizontalAlignment="RIGHT"  alpha="0.85">
+                    <Dimensions x="600" y="50" />
+                    <Anchor point="TOPRIGHT"  relativeTo="$(parent)parent" relativePoint="TOPRIGHT" offsetX="-4" offsetY="-2"/>
+                </Label>
+            </Controls>
+        </TopLevelControl>
+    </Controls>
+    <Controls>
+        <TopLevelControl name="PortalWindow" clampedToScreen="true" mouseEnabled="true" movable="true" hidden="false">
+            <Dimensions x="350" y="35" />
+            <Anchor point="TOPLEFT" relativeTo="GuiRoot" relativePoint="RIGHT" offsetX="-400" offsetY="-200"/>
+            <OnMoveStop>
+                Medusa.PortalWindowSaveLoc()
+            </OnMoveStop>
+            <Controls>
+                <Backdrop name="$(parent)Backdrop" edgeColor="00000000" layer="0" level="0" centerColor="EEEEEE" alpha="0.4"  hidden="false">
+                    <Dimensions x="350" y="35" />
+                    <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT"/>
+                    <Edge edgeSize="0" />
+                </Backdrop>
+
+                <StatusBar name="$(parent)StatusBar" layer="0" level="1" color="5BC0DE" alpha="1" hidden="false">
+                    <Dimensions x="350" y="35" />
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="0" offsetY="0"/>
+                    <Limits min="0" max="100" />
+                </StatusBar>
+
+                <Label name="$(parent)Label" font="ZoFontWinH4" color="ffffff" text="Next portal: GROUP 1" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
+                    <Dimensions x="350" y="35" />
+                    <Anchor point="TOPLEFT"  relativeTo="$(parent)parent" relativePoint="TOPLEFT" offsetX="4" offsetY="-2"/>
+                </Label>
+
+                <Label name="$(parent)LabelTime" font="ZoFontWinH4" color="ffffff" text="" verticalAlignment="CENTER" horizontalAlignment="RIGHT"  alpha="0.85">
+                    <Dimensions x="350" y="35" />
+                    <Anchor point="TOPRIGHT"  relativeTo="$(parent)parent" relativePoint="TOPRIGHT" offsetX="-4" offsetY="-2"/>
+                </Label>
+            </Controls>
+        </TopLevelControl>
+    </Controls>
+    <Controls>
+        <TopLevelControl name="KiteWindow" clampedToScreen="true" mouseEnabled="true" movable="true" hidden="false">
+            <Dimensions x="350" y="35" />
+            <Anchor point="TOPLEFT" relativeTo="GuiRoot" relativePoint="RIGHT" offsetX="-400" offsetY="-160"/>
+            <OnMoveStop>
+                Medusa.KiteWindowSaveLoc()
+            </OnMoveStop>
+            <Controls>
+                <Backdrop name="$(parent)Backdrop" edgeColor="00000000" layer="0" level="0" centerColor="EEEEEE" alpha="0.4"  hidden="false">
+                    <Dimensions x="350" y="35" />
+                    <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT"/>
+                    <Edge edgeSize="0" />
+                </Backdrop>
+
+                <StatusBar name="$(parent)StatusBar" layer="0" level="1" color="5BC0DE" alpha="1" hidden="false">
+                    <Dimensions x="350" y="35" />
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="0" offsetY="0"/>
+                    <Limits min="0" max="100" />
+                </StatusBar>
+
+                <Label name="$(parent)Label" font="ZoFontWinH4" color="ffffff" text="First kite at 80%" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
+                    <Dimensions x="350" y="35" />
+                    <Anchor point="TOPLEFT"  relativeTo="$(parent)parent" relativePoint="TOPLEFT" offsetX="4" offsetY="-2"/>
+                </Label>
+
+                <Label name="$(parent)LabelTime" font="ZoFontWinH4" color="ffffff" text="" verticalAlignment="CENTER" horizontalAlignment="RIGHT"  alpha="0.85">
+                    <Dimensions x="350" y="35" />
+                    <Anchor point="TOPRIGHT"  relativeTo="$(parent)parent" relativePoint="TOPRIGHT" offsetX="-4" offsetY="-2"/>
+                </Label>
+            </Controls>
+        </TopLevelControl>
+    </Controls>
+</GuiXml>
