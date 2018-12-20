@@ -151,6 +151,16 @@ function Medusa.DebugCommand(extra)
 end
 
 -------------------------------------------------------------------------------------------------
+--  Helper method to determine if item is in given table/array  --
+-------------------------------------------------------------------------------------------------
+function Medusa.inTable(tbl, item)
+    for key, value in pairs(tbl) do
+        if value == item then return key end
+    end
+    return false
+end
+
+-------------------------------------------------------------------------------------------------
 --  Command requests Methods  --
 -------------------------------------------------------------------------------------------------
 -- General events and commands

@@ -1,7 +1,7 @@
 Medusa = Medusa or {}
 
 Medusa.Cloudrest = {
-    version = "1.0.4",
+    version = "1.0.5",
     combatStart = 0,
     name = "MedusaCloudrestZMaja",
     targetId = 0,
@@ -119,23 +119,21 @@ function Medusa.CloudrestCombatCallbacks(_, result, isError, aName, aGraphic, aA
         EVENT_MANAGER:RegisterForUpdate(Medusa.Cloudrest.settings.Portal.name, 1000, Medusa.CloudrestShowOngoingPortal)
         EVENT_MANAGER:RegisterForUpdate(Medusa.Cloudrest.settings.Portal.bigName, 1000, Medusa.CloudrestShowOngoingBigPortal)
     -- Additional portal spawn times
-    elseif abilityId == Medusa.Cloudrest.settings.Portal.closeId.a or
-           abilityId == Medusa.Cloudrest.settings.Portal.closeId.b or
-           abilityId == Medusa.Cloudrest.settings.Portal.spiderSpawn
+    elseif Medusa.inTable(Medusa.Cloudrest.settings.Portal.closeId, abilityId) or abilityId == Medusa.Cloudrest.settings.Portal.spiderSpawn
     then
         EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.name)
         EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.bigName)
         BigPortalWindow:SetHidden(true)
         -- Swap group names
-        if Medusa.Cloudrest.settings.Portal.nextAppearances == 1 then
-            Medusa.Cloudrest.settings.Portal.nextAppearances = 2
+        if Medusa.Cloudrest.settings.Portal.currentGroup == 1 then
+            Medusa.Cloudrest.settings.Portal.currentGroup = 2
         else
-            Medusa.Cloudrest.settings.Portal.nextAppearances = 1
+            Medusa.Cloudrest.settings.Portal.currentGroup = 1
         end
         Medusa.Cloudrest.settings.Portal.started = current
         EVENT_MANAGER:RegisterForUpdate(Medusa.Cloudrest.settings.Portal.name, 1000, Medusa.CloudrestShowAdditioanlPortal)
     -- Show on player portal entrance
-    elseif abilityId == Medusa.Cloudrest.settings.Portal.playerEnterId.a or abilityId == Medusa.Cloudrest.settings.Portal.playerEnterId.b then
+    elseif Medusa.inTable(Medusa.Cloudrest.settings.Portal.playerEnterId, abilityId) then
         if (tType == COMBAT_UNIT_TYPE_PLAYER) then
             BigPortalWindow:SetHidden(false)
         end
@@ -241,10 +239,10 @@ function Medusa.CloudrestShowInitialPortal()
         EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.name)
 
         -- Swap groups at end
-        if Medusa.Cloudrest.settings.Portal.nextAppearances == 1 then
-            Medusa.Cloudrest.settings.Portal.nextAppearances = 2
+        if Medusa.Cloudrest.settings.Portal.currentGroup == 1 then
+            Medusa.Cloudrest.settings.Portal.currentGroup = 2
         else
-            Medusa.Cloudrest.settings.Portal.nextAppearances = 1
+            Medusa.Cloudrest.settings.Portal.currentGroup = 1
         end
     end
 end
@@ -308,7 +306,7 @@ function Medusa.CloudrestShowAdditioanlPortal()
     local remainString = Medusa.SecondsToMinutes(remaining)
     local currentGroup = Medusa.Cloudrest.settings.Portal.currentGroup
 
-    d("Current:" .. current .. ", Started:" .. Medusa.Cloudrest.settings.Portal.started .. ", Endtime:" .. endtime .. ", NextAppearance:" .. Medusa.Cloudrest.settings.Portal.nextAppearances .. ", Remaining:" .. remaining)
+    --d("Current:" .. current .. ", Started:" .. Medusa.Cloudrest.settings.Portal.started .. ", Endtime:" .. endtime .. ", NextAppearance:" .. Medusa.Cloudrest.settings.Portal.nextAppearances .. ", Remaining:" .. remaining)
 
     -- Activate bar
     k = Medusa.Cloudrest.settings.Color.Portal
