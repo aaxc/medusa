@@ -1,7 +1,7 @@
-## Title: Medusa |c8e24aaRC1|r
-## Description: Medusa Guilds Trial helper addon. Currently has break timer and Cloudrest+3 assistance
+## Title: Medusa |c8e24aaBeta|r
+## Description: Medusa Guilds Trial helper. Break command: "/md break 5"
 ## Author: |c8BC34AAaxc|r
-## Version: 1.1.5
+## Version: 1.1.7
 ## APIVersion: 100025
 ## SavedVariables: MedusaVars
 ## OptionalDependsOn: LibGroupSocket

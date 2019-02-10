@@ -1,7 +1,7 @@
 Medusa = {
     -- Main info
     name = "Medusa",
-    version = "1.1.4",
+    version = "1.1.7",
     author = "@Aaxc",
     characterId = GetCurrentCharacterId(),
 
@@ -20,7 +20,10 @@ Medusa = {
         Location = CENTER,
         OffsetX = -175,
         OffsetY = -150,
-    }
+    },
+
+    -- Combat exit timer
+    exitCombat = 0
 }
 
 -------------------------------------------------------------------------------------------------
@@ -43,6 +46,7 @@ function Medusa.OnPlayerCombatState(event, inCombat)
         -- The player's state has changed. Update the stored state...
         Medusa.inCombat = inCombat
         Medusa.location = GetMapName()
+        EVENT_MANAGER:UnregisterForUpdate('ExitDelay')
     end
 
     -- Check location and make action
@@ -51,25 +55,27 @@ function Medusa.OnPlayerCombatState(event, inCombat)
         if Medusa.location == "Cloudrest" then
             Medusa.InitCloudrest()
         else
-            Medusa.StopAllCombatEvents() -- @TODO: Can use one method, but only check, if combat has ended for more than 2 seconds or so
-        end
-    else
-        -- Exiting combat
-        if Medusa.location == "Cloudrest" then
-            Medusa.StopCombatEvents()
-            Medusa.Cloudrest.combatStart = 0
-        else
             Medusa.StopAllCombatEvents()
         end
+    else
+        Medusa.exitCombat = tonumber(GetTimeStamp())
+        EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.name)
+        EVENT_MANAGER:RegisterForUpdate('ExitDelay', 1000, Medusa.QueueStopAllCombatEvents)
     end
 end
 
 -------------------------------------------------------------------------------------------------
---  Stop specific events, when combat ends  --
+--  Adds combat queue for 5s after exit
 -------------------------------------------------------------------------------------------------
-function Medusa.StopCombatEvents()
-    -- Stop events
-    EVENT_MANAGER:UnregisterForEvent(Medusa.Cloudrest.name)
+function Medusa.QueueStopAllCombatEvents()
+    local current = tonumber(GetTimeStamp())
+    local remaining = current - Medusa.exitCombat
+
+    -- Stop all combat timers, if more then 5 secods have passed
+    if remaining > 5 then
+        Medusa.StopAllCombatEvents()
+        EVENT_MANAGER:UnregisterForUpdate('ExitDelay')
+    end
 end
 
 -------------------------------------------------------------------------------------------------
@@ -77,8 +83,10 @@ end
 -------------------------------------------------------------------------------------------------
 function Medusa.StopAllCombatEvents()
     -- Stop portal timers
-    PortalWindow:SetHidden(true)
-    KiteWindow:SetHidden(true)
+    Medusa.Cloudrest.Reset()
+--    PortalWindow:SetHidden(true)
+--    BigPortalWindow:SetHidden(true)
+--    KiteWindow:SetHidden(true)
 
     -- Stop events
     EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.name)
@@ -129,11 +137,10 @@ end
 -------------------------------------------------------------------------------------------------
 function Medusa.DebugCommand(extra)
     -- Get parameter data
-    local i, mins = 0
-    local msg = "Break"
+    local i = 0
     for k in string.gmatch(extra, "%S+") do
         i = i + 1
-        if i == 1 then
+        if i == 2 then
             -- check if stop command given
             if k == "show" then
                 Medusa.debug = true,
@@ -151,25 +158,31 @@ function Medusa.DebugCommand(extra)
 end
 
 -------------------------------------------------------------------------------------------------
---  Helper method to determine if item is in given table/array  --
+--  Manage slash commands --
 -------------------------------------------------------------------------------------------------
-function Medusa.inTable(tbl, item)
-    for key, value in pairs(tbl) do
-        if value == item then return key end
+function Medusa.SlashCommands(extra)
+    local i = 0
+    -- Get general options
+    for k in string.gmatch(extra, "%S+") do
+        i = i + 1
+        if i == 1 then
+            -- Break command
+            if k == "break" then
+                Medusa.BreakCommand(extra)
+            -- Debug command
+            elseif k == "debug" then
+                Medusa.DebugCommand(extra)
+            end
+        end
     end
-    return false
 end
 
 -------------------------------------------------------------------------------------------------
 --  Command requests Methods  --
 -------------------------------------------------------------------------------------------------
 -- General events and commands
--- @TODO: make general commade, like /medusa or /md with additions
 EVENT_MANAGER:RegisterForEvent(Medusa.name, EVENT_PLAYER_COMBAT_STATE, Medusa.OnPlayerCombatState)
 EVENT_MANAGER:RegisterForEvent(Medusa.name, EVENT_ADD_ON_LOADED, Medusa.OnAddOnLoaded)
-SLASH_COMMANDS["/mdbreak"] = function(extra)
-    Medusa.BreakCommand(extra)
-end
-SLASH_COMMANDS["/mddebug"] = function(extra)
-    Medusa.DebugCommand(extra)
+SLASH_COMMANDS["/md"] = function(extra)
+    Medusa.SlashCommands(extra)
 end

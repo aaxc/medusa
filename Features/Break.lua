@@ -2,7 +2,7 @@ Medusa = Medusa or {}
 
 Medusa.Break = {
     name = "Break Bar",
-    version = "1.1.0",
+    version = "1.1.1",
     author = "@Aaxc",
 
     -- Timestamp variables
@@ -153,6 +153,7 @@ function Medusa.BreakCommand(extra)
     for k in string.gmatch(extra, "%S+") do
         i = i + 1
         if i == 1 then
+        elseif i == 2 then
             -- check if stop command given
             if k == "stop" then
                 MedusaWindow:SetHidden(true)
@@ -170,8 +171,8 @@ function Medusa.BreakCommand(extra)
 
             mins = tonumber(k)
         else
-            -- Reset if second parameter set
-            if i == 2 then
+            -- Reset if third parameter set
+            if i == 3 then
                 msg = ""
             end
             msg = msg .. k .. " "

@@ -4,7 +4,7 @@ Medusa Guilds Trial helper addon. Currently has break timer and Cloudrest+3 assi
 
 * **Version**
 
-  > 1.1.5 RC1
+  > 1.1.7 Beta
   
 * **Dependencies**
 
@@ -12,7 +12,9 @@ Medusa Guilds Trial helper addon. Currently has break timer and Cloudrest+3 assi
 
 * **Latest Changes**
 
-  > Fixed next group timer   
+  > Remade slash commands into one general
+
+  > Removed inTable method, was giving errors >.<
 
 * **Author**
 

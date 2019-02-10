@@ -1,10 +1,10 @@
 Medusa = Medusa or {}
 
 Medusa.Cloudrest = {
-    version = "1.0.5",
+    version     = "1.1.1",
     combatStart = 0,
-    name = "MedusaCloudrestZMaja",
-    targetId = 0,
+    name        = "MedusaCloudrestZMaja",
+    targetId    = 0,
 
     -- CR Settings
     settings = {
@@ -12,8 +12,8 @@ Medusa.Cloudrest = {
         Color = {
             Portal = { r = 26, g = 35, b = 126 },
             BigPortal = {
-                main = { r = 40, g = 53, b = 147 },
-                lines = { r = 95, g = 95, b = 196 },
+                main    = { r = 40, g = 53, b = 147 },
+                lines   = { r = 95, g = 95, b = 196 },
                 explode = { r = 255, g = 95, b = 82 },
             },
             Kite = { r = 74, g = 20, b = 140 },
@@ -27,41 +27,40 @@ Medusa.Cloudrest = {
 
         -- Portals
         Portal = {
-            name = "PortalUpdate",
+            name    = "PortalUpdate",
             bigName = "BigPortalUpdate",
 
-            spiderSpawn = 104216, -- @TODO WRONG
-            closeId = {
-                a = 104792, -- PC Win Shadow Realm
-                b = 109017, -- Shift Shadow Stop
-            },
+            closeId = 104792, -- PC Win Shadow Realm
             orbDelivered = 104047, -- Shadow Piercer Exit
-            abilityId = 103946, -- Shadow Realm Cast
-            playerEnterId = { a = 108045, b = 104620 }, -- Shadow World
-            playerExitId = 105218, -- PC Exit SRealm
+            abilityId    = 103946, -- Shadow Realm Cast
 
-            currentGroup = 1,
+            playerEnterId = { a = 108045, b = 104620 }, -- Shadow World
+            playerExitId  = 105218, -- PC Exit SRealm
+
+            spiderSpawn = 104216, -- @TODO WRONG
+
+            currentGroup    = 1,
             firstAppearance = 55,
             nextAppearances = 45,
-            started = 0,
-            totalTime = 75,
+            started         = 0,
+            totalTime       = 75,
         },
 
         -- Kiting
         Kite = {
-            name = "KiteUpdate",
-            started = 0,
+            name      = "KiteUpdate",
+            started   = 0,
             abilityId = 105239, -- Crushing Darkness Cas
-            timer = 25,
-            duration = 10,
+            timer     = 25,
+            duration  = 10,
 
             kiteAppearance = 80,
         },
 
         -- Spheres
         Spheres = {
-            name = "SpheresUpdate",
-            abilityId = 105291, -- SUM Shadow Beads
+            name            = "SpheresUpdate",
+            abilityId       = 105291, -- SUM Shadow Beads
             firstAppearance = 20,
             nextAppearances = 35,
         }
@@ -84,7 +83,6 @@ function Medusa.InitCloudrest()
     -- 1: Start with portal counter, add GROUP 1
     -- 2: Add "SOON" once over
     -- @TODO 3: Add "IN PROGRESS" while its going and show timer, till Z'Maja comes up
-    -- @TODO 4: Reset when portal closed and add NEXT group to message
     KiteWindow:SetHidden(false)
     EVENT_MANAGER:RegisterForUpdate(Medusa.Cloudrest.settings.Portal.name, 1000, Medusa.CloudrestShowInitialPortal)
 
@@ -113,17 +111,15 @@ function Medusa.CloudrestCombatCallbacks(_, result, isError, aName, aGraphic, aA
             EVENT_MANAGER:RegisterForUpdate(Medusa.Cloudrest.settings.Kite.name, 1000, Medusa.CloudrestShowKite)
         end
     -- Portal spawn (Ongoing timers)
-    elseif abilityId == Medusa.Cloudrest.settings.Portal.abilityId and pType < 1 then
+    elseif abilityId == Medusa.Cloudrest.settings.Portal.abilityId then
         Medusa.Cloudrest.settings.Portal.started = current
         EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.name)
         EVENT_MANAGER:RegisterForUpdate(Medusa.Cloudrest.settings.Portal.name, 1000, Medusa.CloudrestShowOngoingPortal)
         EVENT_MANAGER:RegisterForUpdate(Medusa.Cloudrest.settings.Portal.bigName, 1000, Medusa.CloudrestShowOngoingBigPortal)
-    -- Additional portal spawn times
-    elseif Medusa.inTable(Medusa.Cloudrest.settings.Portal.closeId, abilityId) or abilityId == Medusa.Cloudrest.settings.Portal.spiderSpawn
-    then
+    -- Portal close event
+    elseif abilityId == Medusa.Cloudrest.settings.Portal.closeId then
         EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.name)
         EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.bigName)
-        BigPortalWindow:SetHidden(true)
         -- Swap group names
         if Medusa.Cloudrest.settings.Portal.currentGroup == 1 then
             Medusa.Cloudrest.settings.Portal.currentGroup = 2
@@ -133,7 +129,8 @@ function Medusa.CloudrestCombatCallbacks(_, result, isError, aName, aGraphic, aA
         Medusa.Cloudrest.settings.Portal.started = current
         EVENT_MANAGER:RegisterForUpdate(Medusa.Cloudrest.settings.Portal.name, 1000, Medusa.CloudrestShowAdditioanlPortal)
     -- Show on player portal entrance
-    elseif Medusa.inTable(Medusa.Cloudrest.settings.Portal.playerEnterId, abilityId) then
+    elseif abilityId == Medusa.Cloudrest.settings.Portal.playerEnterId.a or
+           abilityId == Medusa.Cloudrest.settings.Portal.playerEnterId.b then
         if (tType == COMBAT_UNIT_TYPE_PLAYER) then
             BigPortalWindow:SetHidden(false)
         end
@@ -157,58 +154,6 @@ function Medusa.CloudrestCombatCallbacks(_, result, isError, aName, aGraphic, aA
             end
         end
     end
-
-    --d("Ability Name: "  ..  aName ..
-    --", Ability Id: " .. abilityId ..
-    --", Target Name: " .. tName ..
-    --", Target Type: " .. tType ..
-    --", Target Unit ID: " .. tUnitId ..
-    --", Attacker Unit Id: " .. sUnitId ..
-    --", Attacker Name: " .. sName ..
-    --", Attacker Type: " .. sType ..
-    --", Hit Value: " .. hitValue ..
-    --", pType: " .. pType ..
-    --", dType: " .. dType)
-
-    --d("result")
-    --d(result)
-    --d("isError")
-    --d(isError)
-    --d("aName")
-    --d(aName)
-    --d("aGraphic")
-    --d(aGraphic)
-    --d("aActionSlotType")
-    --d(aActionSlotType)
-    --d("sName")
-    --d(sName)
-    --d("sType")
-    --d(sType)
-    --d("tName")
-    --d(tName)
-    --d("tType")
-    --d(tType)
-    --d("hitValue")
-    --d(hitValue)
-    --d("pType")
-    --d(pType)
-    --d("dType")
-    --d(dType)
-    --d("log")
-    --d(log)
-    --d("sUnitId")
-    --d(sUnitId)
-    --d("tUnitId")
-    --d(tUnitId)
-    --d("abilityId")
-    --d(abilityId)
-    --d('----')
-    --local test = {
-    --    name = "Minor Wound",
-    --    abilityId = 10601,
-    --    sUnitId = 48490,
-    --    sName = "Skeletal Healer",
-    --}
 end
 
 -------------------------------------------------------------------------------------------------
@@ -222,7 +167,7 @@ function Medusa.CloudrestShowInitialPortal()
     local currentGroup = Medusa.Cloudrest.settings.Portal.currentGroup
 
     -- Activate bar
-    k = Medusa.Cloudrest.settings.Color.Portal
+    local k = Medusa.Cloudrest.settings.Color.Portal
     PortalWindowStatusBar:SetColor(k.r / 255, k.g / 255, k.b / 255)
     PortalWindowStatusBar:SetMinMax(0, Medusa.Cloudrest.settings.Portal.firstAppearance)
     PortalWindowStatusBar:SetValue(remaining)
@@ -258,6 +203,7 @@ function Medusa.CloudrestShowOngoingPortal()
     local remainString = Medusa.SecondsToMinutes(remaining)
 
     -- Sync with regular bar
+    local k = Medusa.Cloudrest.settings.Color.BigPortal.main
     PortalWindowStatusBar:SetColor(k.r / 255, k.g / 255, k.b / 255)
     PortalWindowStatusBar:SetMinMax(0, Medusa.Cloudrest.settings.Portal.totalTime)
     PortalWindowStatusBar:SetValue(remaining)
@@ -283,7 +229,7 @@ function Medusa.CloudrestShowOngoingBigPortal()
     local remainString = Medusa.SecondsToMinutes(remaining)
 
     -- Activate bar
-    k = Medusa.Cloudrest.settings.Color.BigPortal.main
+    local k = Medusa.Cloudrest.settings.Color.BigPortal.main
     BigPortalWindowStatusBar:SetColor(k.r / 255, k.g / 255, k.b / 255)
     BigPortalWindowStatusBar:SetMinMax(0, Medusa.Cloudrest.settings.Portal.totalTime)
     BigPortalWindowStatusBar:SetValue(remaining)
@@ -306,10 +252,8 @@ function Medusa.CloudrestShowAdditioanlPortal()
     local remainString = Medusa.SecondsToMinutes(remaining)
     local currentGroup = Medusa.Cloudrest.settings.Portal.currentGroup
 
-    --d("Current:" .. current .. ", Started:" .. Medusa.Cloudrest.settings.Portal.started .. ", Endtime:" .. endtime .. ", NextAppearance:" .. Medusa.Cloudrest.settings.Portal.nextAppearances .. ", Remaining:" .. remaining)
-
     -- Activate bar
-    k = Medusa.Cloudrest.settings.Color.Portal
+    local k = Medusa.Cloudrest.settings.Color.Portal
     PortalWindowStatusBar:SetColor(k.r / 255, k.g / 255, k.b / 255)
     PortalWindowStatusBar:SetMinMax(0, Medusa.Cloudrest.settings.Portal.nextAppearances)
     PortalWindowStatusBar:SetValue(remaining)
@@ -335,14 +279,14 @@ function Medusa.CloudrestShowKite()
     local endtime = Medusa.Cloudrest.settings.Kite.started + Medusa.Cloudrest.settings.Kite.timer
     local remaining = endtime - current
 
-    k = Medusa.Cloudrest.settings.Color.Kite
+    local k = Medusa.Cloudrest.settings.Color.Kite
     local kiteTime = Medusa.Cloudrest.settings.Kite.started - current + Medusa.Cloudrest.settings.Kite.duration
     if kiteTime > 0 then
         local remainString = Medusa.SecondsToMinutes(kiteTime)
         KiteWindowStatusBar:SetMinMax(0, Medusa.Cloudrest.settings.Kite.duration)
         KiteWindowStatusBar:SetValue(kiteTime)
         KiteWindowStatusBar:SetColor(k.r / 255, k.g / 255, k.b / 255)
-        KiteWindowLabel:SetText("Crushing Darkness on you. Kite!")
+        KiteWindowLabel:SetText("Crushing Darkness ongoing")
         KiteWindowLabelTime:SetText(remainString)
         KiteWindow:SetHidden(false)
     else
@@ -398,4 +342,16 @@ function Medusa.CloudrestShowBars(show)
         BigPortalWindow:SetHidden(true)
         KiteWindow:SetHidden(true)
     end
+end
+
+-------------------------------------------------------------------------------------------------
+--  Hides all windows  --
+-------------------------------------------------------------------------------------------------
+function Medusa.Cloudrest.Reset()
+    Medusa.Cloudrest.settings.Portal.currentGroup = 1
+    PortalWindowLabel:SetText("Portal soon")
+    PortalWindow:SetHidden(true)
+    BigPortalWindow:SetHidden(true)
+    KiteWindow:SetHidden(true)
+    KiteWindowLabel:SetText("First kite at 80%")
 end
