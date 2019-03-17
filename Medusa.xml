@@ -32,7 +32,7 @@
         </TopLevelControl>
     </Controls>
     <Controls>
-        <TopLevelControl name="BigPortalWindow" clampedToScreen="true" mouseEnabled="true" movable="true" hidden="false">
+        <TopLevelControl name="BigPortalWindow" clampedToScreen="true" mouseEnabled="true" movable="false" hidden="false">
             <Dimensions x="600" y="50" />
             <Anchor point="TOPLEFT" relativeTo="GuiRoot" relativePoint="CENTER" offsetX="-300" offsetY="-300"/>
             <OnMoveStop>
@@ -133,7 +133,7 @@
         </TopLevelControl>
     </Controls>
     <Controls>
-        <TopLevelControl name="PortalWindow" clampedToScreen="true" mouseEnabled="true" movable="true" hidden="false">
+        <TopLevelControl name="PortalWindow" clampedToScreen="true" mouseEnabled="true" movable="false" hidden="false">
             <Dimensions x="350" y="35" />
             <Anchor point="TOPLEFT" relativeTo="GuiRoot" relativePoint="RIGHT" offsetX="-400" offsetY="-200"/>
             <OnMoveStop>
@@ -165,7 +165,7 @@
         </TopLevelControl>
     </Controls>
     <Controls>
-        <TopLevelControl name="KiteWindow" clampedToScreen="true" mouseEnabled="true" movable="true" hidden="false">
+        <TopLevelControl name="KiteWindow" clampedToScreen="true" mouseEnabled="true" movable="false" hidden="false">
             <Dimensions x="350" y="35" />
             <Anchor point="TOPLEFT" relativeTo="GuiRoot" relativePoint="RIGHT" offsetX="-400" offsetY="-160"/>
             <OnMoveStop>

@@ -1,7 +1,7 @@
 Medusa = {
     -- Main info
     name = "Medusa",
-    version = "1.1.10",
+    version = "1.2.0",
     author = "@Aaxc",
     characterId = GetCurrentCharacterId(),
 
@@ -20,6 +20,10 @@ Medusa = {
         Location = CENTER,
         OffsetX = -175,
         OffsetY = -150,
+        lockBar = true,
+        kiteWidth = 350,
+        kiteHeight = 35,
+        kiteColor = { 74, 20, 140, 1 },
     },
 
     -- Combat exit timer
@@ -27,7 +31,12 @@ Medusa = {
 }
 
 -------------------------------------------------------------------------------------------------
---  OnAddOnLoaded  --
+-- Libraries --
+-------------------------------------------------------------------------------------------------
+local LAM2 = LibStub:GetLibrary("LibAddonMenu-2.0")
+
+-------------------------------------------------------------------------------------------------
+-- OnAddOnLoaded  --
 -------------------------------------------------------------------------------------------------
 function Medusa.OnAddOnLoaded(event, addonName)
     if addonName ~= Medusa.name then
@@ -38,7 +47,7 @@ function Medusa.OnAddOnLoaded(event, addonName)
 end
 
 -------------------------------------------------------------------------------------------------
---  OnPlayerCombatState  --
+-- OnPlayerCombatState  --
 -------------------------------------------------------------------------------------------------
 function Medusa.OnPlayerCombatState(event, inCombat)
     -- The ~= operator is "not equal to" in Lua.
@@ -65,7 +74,7 @@ function Medusa.OnPlayerCombatState(event, inCombat)
 end
 
 -------------------------------------------------------------------------------------------------
---  Adds combat queue for 5s after exit
+-- Adds combat queue for 5s after exit
 -------------------------------------------------------------------------------------------------
 function Medusa.QueueStopAllCombatEvents()
     local current = tonumber(GetTimeStamp())
@@ -79,7 +88,7 @@ function Medusa.QueueStopAllCombatEvents()
 end
 
 -------------------------------------------------------------------------------------------------
---  Stop all events, when combat ends  --
+-- Stop all events, when combat ends  --
 -------------------------------------------------------------------------------------------------
 function Medusa.StopAllCombatEvents()
     -- Reset trials
@@ -94,17 +103,17 @@ end
 
 
 -------------------------------------------------------------------------------------------------
---  Initialize Medusa --
+-- Initialize Medusa --
 -------------------------------------------------------------------------------------------------
 function Medusa:Initialize()
-
-    -- @TODO Register all states when inside CLOUDREST, else do nothing
-
     -- Set combat state
     Medusa.inCombat = IsUnitInCombat("player")
 
     -- Load saved savedVariables
     Medusa.savedVariables = ZO_SavedVars:NewAccountWide("MedusaVars", Medusa.variableVersion, nil, Medusa.Default)
+
+    -- Adds settings menu
+    Medusa.CreateSettingsWindow()
 
     -- Position Break Bar and hide for now
     MedusaWindow:ClearAnchors()
@@ -130,7 +139,7 @@ function Medusa:Initialize()
 end
 
 -------------------------------------------------------------------------------------------------
---  Show/hide bars for debug options  --
+-- Show/hide bars for debug options  --
 -------------------------------------------------------------------------------------------------
 function Medusa.DebugCommand(extra)
     -- Get parameter data
@@ -140,22 +149,20 @@ function Medusa.DebugCommand(extra)
         if i == 2 then
             -- check if stop command given
             if k == "show" then
-                Medusa.debug = true,
-                Medusa.BreakShowBars(true)
-                Medusa.CloudrestShowBars(true)
+                Medusa.debug = true
+                d('Medusa debug ON')
             end
 
             if k == "hide" then
-                Medusa.debug = false,
-                Medusa.BreakShowBars(false)
-                Medusa.CloudrestShowBars(false)
+                Medusa.debug = false
+                d('Medusa debug OFF')
             end
         end
     end
 end
 
 -------------------------------------------------------------------------------------------------
---  Manage slash commands --
+-- Manage slash commands --
 -------------------------------------------------------------------------------------------------
 function Medusa.SlashCommands(extra)
     local i = 0
@@ -166,7 +173,7 @@ function Medusa.SlashCommands(extra)
             -- Break command
             if k == "break" then
                 Medusa.BreakCommand(extra)
-            -- Debug command
+                -- Debug command
             elseif k == "debug" then
                 Medusa.DebugCommand(extra)
             end
@@ -175,7 +182,115 @@ function Medusa.SlashCommands(extra)
 end
 
 -------------------------------------------------------------------------------------------------
---  Command requests Methods  --
+-- Manage slash commands --
+-------------------------------------------------------------------------------------------------
+function Medusa.CreateSettingsWindow()
+    local panelData = {
+        type = "panel",
+        name = "Medusa",
+        displayName = "Medusa Trial helper",
+        author = "|c8BC34AAaxc|r",
+        version = Medusa.version,
+        slashCommand = "/mdsettings",
+        registerForRefresh = true,
+        registerForDefaults = true,
+    }
+    local cntrlOptionsPanel = LAM2:RegisterAddonPanel("Aaxc_Medusa", panelData)
+
+    -- @TODO Load Language strings !!!!!
+    -- @TODO Move this into settins LUA for easier reading
+
+    local optionsData = {
+        {
+            type = "header",
+            name = "General"
+        },
+        {
+            type = "checkbox",
+            name = "Lock bars",
+            tooltip = "When OFF, bars are shown and unlocked and can be dragged around",
+            getFunc = function() return Medusa.savedVariables.lockBar end,
+            setFunc = function(newValue)
+                Medusa.savedVariables.lockBar = newValue
+                Medusa.BreakShowBars(not newValue)
+                Medusa.CloudrestShowBars(not newValue)
+                Medusa.CloudrestUnLockBars(not newValue)
+            end,
+        },
+        {
+            type = "header",
+            name = "Trials"
+        },
+        {
+            type = "description",
+            text = "Here you can configure different trial settings. What you want or don't want to see and what size bars and colors you want to see."
+        },
+        {
+            type = "submenu",
+            name = "Cloudrest",
+            tooltip = "Allows you to configure Coudrest settings",
+            controls = {
+                {
+                    type = "header",
+                    name = "Kite - Crushing darkness"
+                },
+                {
+                    type = "checkbox",
+                    name = "Show Crushing Darkness bar",
+                    tooltip = "When ON, the Kite bar will be shown and can be adjusted",
+                    default = true,
+                    getFunc = function() return Medusa.savedVariables.kiteShow end,
+                    setFunc = function(newValue) Medusa.savedVariables.kiteShow = newValue end,
+                },
+                {
+                    type = "slider",
+                    name = "Select Width",
+                    tooltip = "Adjusts the width of the kite bar.",
+                    min = 200,
+                    max = 500,
+                    step = 1,
+                    default = 350,
+                    getFunc = function() return Medusa.savedVariables.kiteWidth end,
+                    setFunc = function(newValue)
+                        Medusa.savedVariables.kiteWidth = newValue
+                        Medusa.KiteSetBarSize(newValue, Medusa.savedVariables.kiteHeight)
+                    end,
+                },
+                {
+                    type = "slider",
+                    name = "Select Height",
+                    tooltip = "Adjusts the height of the kite bar.",
+                    min = 25,
+                    max = 50,
+                    step = 1,
+                    default = 35,
+                    getFunc = function() return Medusa.savedVariables.kiteHeight end,
+                    setFunc = function(newValue)
+                        Medusa.savedVariables.kiteHeight = newValue
+                        Medusa.KiteSetBarSize(Medusa.savedVariables.kiteWidth, newValue)
+                    end,
+                },
+                {
+                    type = "colorpicker",
+                    name = "Select Color",
+                    tooltip = "Changes the color of the kite bar.",
+                    getFunc = function() return unpack( Medusa.savedVariables.kiteColor ) end,
+                    setFunc = function(r,g,b,a)
+                        local alpha = KiteWindowStatusBar:GetAlpha()
+                        Medusa.savedVariables.kiteColor = { r, g, b, a}
+                        KiteWindowStatusBar:SetColor( r,  g,  b,  a)
+                        KiteWindowStatusBar:SetMinMax(0, 1)
+                        KiteWindowStatusBar:SetValue(1)
+                    end,
+                },
+            },
+        }
+    }
+    LAM2:RegisterOptionControls("Aaxc_Medusa", optionsData)
+end
+
+-------------------------------------------------------------------------------------------------
+-- Command requests Methods  --
 -------------------------------------------------------------------------------------------------
 -- General events and commands
 EVENT_MANAGER:RegisterForEvent(Medusa.name, EVENT_PLAYER_COMBAT_STATE, Medusa.OnPlayerCombatState)

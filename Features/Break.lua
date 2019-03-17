@@ -2,7 +2,6 @@ Medusa = Medusa or {}
 
 Medusa.Break = {
     name = "Break Bar",
-    version = "1.1.1",
     author = "@Aaxc",
 
     -- Timestamp variables

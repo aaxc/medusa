@@ -4,17 +4,17 @@ Medusa Guilds Trial helper addon. Currently has break timer and Cloudrest+3 assi
 
 * **Version**
 
-  > 1.1.7 Beta
+  > 1.2.0
   
 * **Dependencies**
 
-  > LibGroupSocket
+  > LibAddonMenu
 
 * **Latest Changes**
 
-  > Remade slash commands into one general
+  > Cleaned out code
 
-  > Removed inTable method, was giving errors >.<
+  > Added settings and dependency to LibAddonMenu
 
 * **Author**
 

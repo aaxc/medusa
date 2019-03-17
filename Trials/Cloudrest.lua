@@ -2,7 +2,6 @@ Medusa = Medusa or {}
 
 Medusa.Cloudrest = {
     name        = "MedusaCloudrestZMaja",
-    version     = "1.2.0",
     combatStart = 0,
     debugData = {},
 
@@ -36,7 +35,10 @@ Medusa.Cloudrest = {
             orbDropped   = 103980, -- Grant Malevolent Core
             orbDelivered = 104047, -- Shadow Piercer Exit
 
-            playerEnterId = { a = 108045, b = 104620 }, -- Shadow World
+            playerEnterId = { -- Shadow World
+                [108045] = true,
+                [104620] = true,
+            },
             playerExitId  = 105218, -- PC Exit SRealm
 
             foundOrbs       = 0,
@@ -60,37 +62,6 @@ Medusa.Cloudrest = {
         },
     }
 }
-
---[[ Abilities data --]]
--- PC Exit SRealm
-Medusa.Cloudrest.playerEnter = {}
-Medusa.Cloudrest.playerEnter[108045] = true
-Medusa.Cloudrest.playerEnter[104620] = true
-
--- PC Exit SRealm
-Medusa.Cloudrest.playerExit = {}
-Medusa.Cloudrest.playerExit[105218] = true
-
--- Shadow Realm Cast
-Medusa.Cloudrest.PortalOpen = {}
-Medusa.Cloudrest.PortalOpen[103946] = true
-
--- PC Win Shadow Realm
-Medusa.Cloudrest.PortalClose = {}
-Medusa.Cloudrest.PortalClose[104792] = true
-
--- Grant Malevolent Core
-Medusa.Cloudrest.OrbDropped = {}
-Medusa.Cloudrest.OrbDropped[103980] = true
-
--- Shadow Piercer Exit
-Medusa.Cloudrest.OrbDelivered = {}
-Medusa.Cloudrest.OrbDelivered[104047] = true
-
--- Crushing Darkness Cas
-Medusa.Cloudrest.Kite = {}
-Medusa.Cloudrest.Kite[105239] = true
-
 
 --- MAJOR: Debug data for checking IDs ---
 Medusa.Cloudrest.debugDataName = "ORBS KILL"
@@ -156,8 +127,7 @@ function Medusa.CloudrestCombatCallbacks(_, result, isError, aName, aGraphic, aA
         Medusa.Cloudrest.settings.Portal.started = current
         EVENT_MANAGER:RegisterForUpdate(Medusa.Cloudrest.settings.Portal.name, 100, Medusa.CloudrestShowAdditioanlPortal)
     -- Show on player portal entrance
-    elseif abilityId == Medusa.Cloudrest.settings.Portal.playerEnterId.a or
-           abilityId == Medusa.Cloudrest.settings.Portal.playerEnterId.b then
+    elseif Medusa.Cloudrest.settings.Portal.playerEnterId[abilityId] then
         if (tType == COMBAT_UNIT_TYPE_PLAYER) then
             BigPortalWindow:SetHidden(false)
         end
@@ -385,19 +355,45 @@ function Medusa.KiteWindowSaveLoc()
 end
 
 -------------------------------------------------------------------------------------------------
+--  Adjust sizes  --
+-------------------------------------------------------------------------------------------------
+function Medusa.KiteSetBarSize(_width, _height)
+    KiteWindow:SetDimensions(_width, _height)
+    KiteWindowBackdrop:SetDimensions(_width, _height)
+    KiteWindowStatusBar:SetDimensions(_width, _height)
+    KiteWindowLabel:SetDimensions(_width, _height)
+    KiteWindowLabelTime:SetDimensions(_width, _height)
+end
+
+-------------------------------------------------------------------------------------------------
 --  Show/hide bars  --
 -------------------------------------------------------------------------------------------------
-function Medusa.CloudrestShowBars(show)
-    if show == true then
-        PortalWindow:SetHidden(false)
-        BigPortalWindow:SetHidden(false)
-        KiteWindow:SetHidden(false)
+function Medusa.CloudrestShowBars(_show)
+    PortalWindow:SetHidden(not _show)
+    BigPortalWindow:SetHidden(not _show)
+    KiteWindow:SetHidden(not _show)
+
+    -- Set fully colored for easier color picking
+    KiteWindowStatusBar:SetMinMax(0, 1)
+    PortalWindowStatusBar:SetMinMax(0, 1)
+    if _show == true then
+        KiteWindowStatusBar:SetValue(1)
+        PortalWindowStatusBar:SetValue(1)
     else
-        PortalWindow:SetHidden(true)
-        BigPortalWindow:SetHidden(true)
-        KiteWindow:SetHidden(true)
+        KiteWindowStatusBar:SetValue(0)
+        PortalWindowStatusBar:SetValue(0)
     end
 end
+
+-------------------------------------------------------------------------------------------------
+--  Lock/unlock bar movement  --
+-------------------------------------------------------------------------------------------------
+function Medusa.CloudrestUnLockBars(_show)
+    PortalWindow:SetMovable(_show)
+    BigPortalWindow:SetMovable(_show)
+    KiteWindow:SetMovable(_show)
+end
+
 
 -------------------------------------------------------------------------------------------------
 --  Hides all windows  --
