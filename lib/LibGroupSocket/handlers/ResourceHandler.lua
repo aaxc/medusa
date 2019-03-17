@@ -185,7 +185,7 @@ local isActive = false
 
 local function StartSending()
     if(not isActive and saveData.enabled and IsUnitGrouped("player")) then
-        EVENT_MANAGER:RegisterForUpdate("LibGroupSocketResourceHandler", 1000, OnUpdate)
+        EVENT_MANAGER:RegisterForUpdate("LibGroupSocketResourceHandler", 100, OnUpdate)
         isActive = true
     end
 end

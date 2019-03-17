@@ -52,13 +52,13 @@
                 </StatusBar>
 
                 <Backdrop name="$(parent)Event1" edgeColor="00000000" layer="0" level="2" centerColor="5F5FC4" alpha="1"  hidden="false">
-                    <Dimensions x="1" y="50" />
+                    <Dimensions x="1.5" y="50" />
                     <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="552" offsetY=""/>
                     <Edge edgeSize="0" />
                 </Backdrop>
 
                 <Backdrop name="$(parent)Event2" edgeColor="00000000" layer="0" level="2" centerColor="5F5FC4" alpha="1"  hidden="false">
-                    <Dimensions x="1" y="50" />
+                    <Dimensions x="1.5" y="50" />
                     <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="480" offsetY=""/>
                     <Edge edgeSize="0" />
                 </Backdrop>
@@ -70,19 +70,19 @@
                 </Backdrop>
 
                 <Backdrop name="$(parent)Event4" edgeColor="00000000" layer="0" level="2" centerColor="5F5FC4" alpha="1"  hidden="false">
-                    <Dimensions x="1" y="50" />
+                    <Dimensions x="1.5" y="50" />
                     <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="360" offsetY=""/>
                     <Edge edgeSize="0" />
                 </Backdrop>
 
                 <Backdrop name="$(parent)Event5" edgeColor="00000000" layer="0" level="2" centerColor="5F5FC4" alpha="1"  hidden="false">
-                    <Dimensions x="1" y="50" />
+                    <Dimensions x="1.5" y="50" />
                     <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="288" offsetY=""/>
                     <Edge edgeSize="0" />
                 </Backdrop>
 
                 <Backdrop name="$(parent)Event6" edgeColor="00000000" layer="0" level="2" centerColor="5F5FC4" alpha="1"  hidden="false">
-                    <Dimensions x="1" y="50" />
+                    <Dimensions x="1.5" y="50" />
                     <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="216" offsetY=""/>
                     <Edge edgeSize="0" />
                 </Backdrop>
@@ -94,13 +94,13 @@
                 </Backdrop>
 
                 <Backdrop name="$(parent)Event8" edgeColor="00000000" layer="0" level="2" centerColor="5F5FC4" alpha="1"  hidden="false">
-                    <Dimensions x="1" y="50" />
+                    <Dimensions x="1.5" y="50" />
                     <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="112" offsetY=""/>
                     <Edge edgeSize="0" />
                 </Backdrop>
 
                 <Backdrop name="$(parent)Event9" edgeColor="00000000" layer="0" level="2" centerColor="5F5FC4" alpha="1"  hidden="false">
-                    <Dimensions x="1" y="50" />
+                    <Dimensions x="1.5" y="50" />
                     <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="50" offsetY=""/>
                     <Edge edgeSize="0" />
                 </Backdrop>
@@ -108,6 +108,11 @@
                 <Label name="$(parent)Label" font="ZoFontWinH4" color="ffffff" text="Portal open" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
                     <Dimensions x="600" y="50" />
                     <Anchor point="TOPLEFT"  relativeTo="$(parent)parent" relativePoint="TOPLEFT" offsetX="10" offsetY="-2"/>
+                </Label>
+
+                <Label name="$(parent)Orbs" font="ZoFontWinH4" color="ffffff" text="0/0" verticalAlignment="CENTER" horizontalAlignment="LEFT">
+                    <Dimensions x="600" y="50" />
+                    <Anchor point="TOPLEFT"  relativeTo="$(parent)parent" relativePoint="TOPLEFT" offsetX="610" offsetY="-2"/>
                 </Label>
 
                 <Label name="$(parent)Label1" font="ZoFontWinH4" color="FF5F52" text="E" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">

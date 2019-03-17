@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="64638d14-786b-4dbb-a24d-c4f30c19b9b8" name="Default Changelist" comment="" />
+    <list default="true" id="64638d14-786b-4dbb-a24d-c4f30c19b9b8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Medusa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Medusa.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Medusa.lua" beforeDir="false" afterPath="$PROJECT_DIR$/Medusa.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Medusa.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Medusa.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Medusa.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Medusa.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Trials/Cloudrest.lua" beforeDir="false" afterPath="$PROJECT_DIR$/Trials/Cloudrest.lua" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,8 +21,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Medusa.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="135" column="8" selection-start-line="135" selection-start-column="8" selection-end-line="135" selection-end-column="8" />
+            <state relative-caret-position="1020">
+              <caret line="60" column="51" selection-start-line="60" selection-start-column="51" selection-end-line="60" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -22,8 +30,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Trials/Cloudrest.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="197" column="44" lean-forward="true" selection-start-line="197" selection-start-column="44" selection-end-line="197" selection-end-column="44" />
+            <state relative-caret-position="255">
+              <caret line="166" column="16" selection-start-line="166" selection-start-column="16" selection-end-line="166" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -32,42 +40,46 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>register</find>
-      <find>mdbrea</find>
-      <find>BreakCommand</find>
-      <find>BreakCoi</find>
-      <find>BigPortalWindow:SetHidden(</find>
-      <find>T1</find>
-      <find>Medusa.Cloudrest.settings.Portal.bigName</find>
-      <find>Entered</find>
-      <find>Alerts_Cloudrest_Shadow_Realm_Cast</find>
-      <find>abilityId</find>
-      <find>BigPortalWindow:SetHidden(true)</find>
-      <find>RegisterForUpdate</find>
-      <find>CloudrestShowOngoingBigPortal</find>
-      <find>Medusa.Cloudrest.settings.Portal.started</find>
-      <find>shadow_realm_cast</find>
-      <find>shadow_world</find>
-      <find>player_exit_srealm</find>
-      <find>orbDelivered</find>
-      <find>playerExitId</find>
-      <find>closeId</find>
-      <find>KiteWindow</find>
-      <find />
-      <find>KiteWindowLabel</find>
-      <find>PortalWindow</find>
       <find>RC1</find>
       <find>StopAllCombatEvents</find>
       <find>d</find>
-      <find>d(</find>
       <find>SHOWONGOINGPORTA</find>
       <find>ShowOngoingPortal</find>
+      <find>Portal open</find>
+      <find>BigPortal</find>
+      <find>Cloudrest</find>
+      <find>spiderSpawn</find>
+      <find>reset(</find>
+      <find>Medusa.Cloudrest.settings.Portal.foundOrbs</find>
+      <find>d(</find>
+      <find>Portal</find>
+      <find>BigPortalWindow</find>
+      <find>orbs = Med</find>
+      <find>local orbs</find>
+      <find>trackPortal</find>
+      <find>reset</find>
+      <find>orbs</find>
+      <find>local orbs =</find>
+      <find>debug</find>
+      <find>103980</find>
+      <find>104047</find>
+      <find>orbDropped</find>
+      <find>orbDelivered</find>
+      <find>[abilityId]</find>
+      <find>NEW</find>
+      <find>KiteWindowLabel</find>
+      <find>debugData</find>
+      <find>Medusa.Cloudrest.debugData</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\daini\Documents\Elder Scrolls Online\live\AddOns\medusa</dir>
-      <dir>C:\Users\daini\Documents\Elder Scrolls Online\live\AddOns\RaidNotifier</dir>
       <dir>C:\Users\daini\Documents\Elder Scrolls Online\live\AddOns\Medusa</dir>
+      <dir>C:\Users\daini\Documents\Elder Scrolls Online\live\AddOns\OpenGlaza</dir>
+      <dir>C:\Users\daini\Documents\Elder Scrolls Online\live\AddOns\RaidNotifier</dir>
     </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -75,44 +87,29 @@
         <option value="$PROJECT_DIR$/Features/Break.lua" />
         <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/Medusa.txt" />
+        <option value="$PROJECT_DIR$/Medusa.xml" />
         <option value="$PROJECT_DIR$/Medusa.lua" />
         <option value="$PROJECT_DIR$/Trials/Cloudrest.lua" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1928" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1096" />
+    <option name="x" value="-1927" />
+    <option name="width" value="1352" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Medusa" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Medusa" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Medusa" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Medusa" type="462c0819:PsiDirectoryNode" />
-              <item name="Trials" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../RaidNotifier" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Armory" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -146,16 +143,20 @@
       <workItem from="1549478526045" duration="47000" />
       <workItem from="1549478590722" duration="2789000" />
       <workItem from="1549651393424" duration="11728000" />
+      <workItem from="1551049076508" duration="62000" />
+      <workItem from="1552228577722" duration="13560000" />
+      <workItem from="1552427489554" duration="3605000" />
+      <workItem from="1552584735648" duration="33000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25665000" />
+    <option name="totallyTimeSpent" value="42925000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18976545" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19829424" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -195,24 +196,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../RaidNotifier/BuffsDebuffs.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1136">
-          <caret line="483" column="28" selection-start-line="483" selection-start-column="10" selection-end-line="483" selection-end-column="28" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/../OpenGlaza/OpenGlaza.txt">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Medusa.xml">
+    <entry file="file://$PROJECT_DIR$/../OpenGlaza/OpenGlaza.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="181" column="85" selection-start-line="181" selection-start-column="85" selection-end-line="181" selection-end-column="102" />
+        <state relative-caret-position="-7">
+          <caret line="466" column="30" selection-start-line="466" selection-start-column="24" selection-end-line="466" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Medusa.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="21" lean-forward="true" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+        <state relative-caret-position="51">
+          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Medusa.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="102" column="38" selection-start-line="102" selection-start-column="38" selection-end-line="102" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -226,17 +230,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../RaidNotifier/BuffsDebuffs.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="864">
+          <caret line="483" column="28" selection-start-line="483" selection-start-column="10" selection-end-line="483" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Medusa.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="135" column="8" selection-start-line="135" selection-start-column="8" selection-end-line="135" selection-end-column="8" />
+        <state relative-caret-position="1020">
+          <caret line="60" column="51" selection-start-line="60" selection-start-column="51" selection-end-line="60" selection-end-column="51" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Trials/Cloudrest.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="197" column="44" lean-forward="true" selection-start-line="197" selection-start-column="44" selection-end-line="197" selection-end-column="44" />
+        <state relative-caret-position="255">
+          <caret line="166" column="16" selection-start-line="166" selection-start-column="16" selection-end-line="166" selection-end-column="16" />
         </state>
       </provider>
     </entry>

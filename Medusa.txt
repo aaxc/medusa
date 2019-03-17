@@ -1,8 +1,8 @@
 ## Title: Medusa |c8e24aaBeta|r
 ## Description: Medusa Guilds Trial helper. Break command: "/md break 5"
 ## Author: |c8BC34AAaxc|r
-## Version: 1.1.7
-## APIVersion: 100025
+## Version: 1.1.9
+## APIVersion: 100026
 ## SavedVariables: MedusaVars
 ## OptionalDependsOn: LibGroupSocket
 

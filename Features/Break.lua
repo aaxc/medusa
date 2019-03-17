@@ -192,7 +192,7 @@ function Medusa.BreakCommand(extra)
     end
 
     -- Initialize event and the bar
-    EVENT_MANAGER:RegisterForUpdate(Medusa.Break.commandName, 1000, Medusa.UpdateBar)
+    EVENT_MANAGER:RegisterForUpdate(Medusa.Break.commandName, 100, Medusa.UpdateBar)
 
     Medusa.Break.Bartime.total = mins * 60
     Medusa.Break.Bartime.endTime = tonumber(GetTimeStamp()) + Medusa.Break.Bartime.total

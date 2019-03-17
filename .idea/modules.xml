@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Breakbar.iml" filepath="$PROJECT_DIR$/.idea/Breakbar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../OpenGlaza/.idea/OpenGlaza.iml" filepath="$PROJECT_DIR$/../OpenGlaza/.idea/OpenGlaza.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../RaidNotifier/.idea/RaidNotifier.iml" filepath="$PROJECT_DIR$/../RaidNotifier/.idea/RaidNotifier.iml" />
       <module fileurl="file://$PROJECT_DIR$/../RaidNotifier/.idea/RaidNotifier.iml" filepath="$PROJECT_DIR$/../RaidNotifier/.idea/RaidNotifier.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/medusa.iml" filepath="$PROJECT_DIR$/.idea/medusa.iml" />
     </modules>

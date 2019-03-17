@@ -1,7 +1,7 @@
 Medusa = {
     -- Main info
     name = "Medusa",
-    version = "1.1.7",
+    version = "1.1.10",
     author = "@Aaxc",
     characterId = GetCurrentCharacterId(),
 
@@ -82,11 +82,8 @@ end
 --  Stop all events, when combat ends  --
 -------------------------------------------------------------------------------------------------
 function Medusa.StopAllCombatEvents()
-    -- Stop portal timers
+    -- Reset trials
     Medusa.Cloudrest.Reset()
---    PortalWindow:SetHidden(true)
---    BigPortalWindow:SetHidden(true)
---    KiteWindow:SetHidden(true)
 
     -- Stop events
     EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.name)
