@@ -9,8 +9,12 @@
 Medusa.lua
 Medusa.xml
 
+Lang/en.lua
+Lang/de.lua
+Lang/fr.lua
 Features/Break.lua
 Trials/Cloudrest.lua
+
 
 Libs/LibStub/LibStub.lua
 Libs/LibAddonMenu-2.0/LibAddonMenu-2.0.lua

@@ -1,7 +1,7 @@
 Medusa = Medusa or {}
 
--- Define language strings
-Medusa.LangEn = {
+-- Define language strings. Translator @Veri
+Medusa.LangFr = {
     -------------------------------------------------------------------------------------------------
     -- General --
     -------------------------------------------------------------------------------------------------

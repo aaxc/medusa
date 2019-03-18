@@ -4,7 +4,7 @@ Medusa Guilds Trial helper addon. Currently has break timer and Cloudrest+3 assi
 
 * **Version**
 
-  > 1.2.0
+  > 1.2.0 RC1
   
 * **Dependencies**
 
@@ -15,6 +15,8 @@ Medusa Guilds Trial helper addon. Currently has break timer and Cloudrest+3 assi
   > Cleaned out code
 
   > Added settings and dependency to LibAddonMenu
+  
+  > Added language support: EN, DE(Translator @Revan), FR(Translator @Veri)
 
 * **Author**
 
@@ -24,11 +26,7 @@ Medusa Guilds Trial helper addon. Currently has break timer and Cloudrest+3 assi
 
   > Check if minis killed, load specific timers for each mini 
 
-  > Check if inside ZMajas room
-
   > Check if ZMaja is active
-
-  > Add block notice, when sphere dies
 
   > First event starts in 20 seconds, second 23 (Fire or Orb)
 
@@ -36,4 +34,4 @@ Medusa Guilds Trial helper addon. Currently has break timer and Cloudrest+3 assi
 
   > Show frost with timer, when
   
-  > Add config options for each trial, like kiters, groups, etc
+  > Add config options for each trial, like kiters, groups, etc <- WORK IN PROGRESS
