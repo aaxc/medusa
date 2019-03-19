@@ -123,7 +123,7 @@ function Medusa.OnPlayerCombatState(event, inCombat)
         end
     else
         Medusa.exitCombat = tonumber(GetTimeStamp())
-        EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.name)
+        EVENT_MANAGER:UnregisterForUpdate("PortalUpdate")
         EVENT_MANAGER:RegisterForUpdate('ExitDelay', 1000, Medusa.QueueStopAllCombatEvents)
     end
 end
@@ -150,8 +150,8 @@ function Medusa.StopAllCombatEvents()
     Medusa.Cloudrest.Reset()
 
     -- Stop events
-    EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.name)
-    EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.bigName)
+    EVENT_MANAGER:UnregisterForUpdate("PortalUpdate")
+    EVENT_MANAGER:UnregisterForUpdate("BigPortalUpdate")
     EVENT_MANAGER:UnregisterForUpdate("KiteStarted")
     EVENT_MANAGER:UnregisterForEvent(Medusa.Cloudrest.name)
     EVENT_MANAGER:UnregisterForEvent("BossesChanged")

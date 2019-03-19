@@ -8,7 +8,7 @@ Medusa.LangFr = {
     Settings_General_Header = "General",
     Settings_General_LockBar = "Verouillée Barre",
     Settings_General_LockBar_Tooltip = "Quand Off la barre afficher peut être bouger",
-    Settings_General_Trials = "raids",
+    Settings_General_Trials = "Raids",
     Settings_General_Trials_Description = "Ici vous pouvez configuré les paramètres de raid. Ce que vous voulez voir la taille des barres et la couleurs que vous désirez voir.",
     Settings_General_Width = "Largeur",
     Settings_General_Width_Tooltip = " largeur de la barre",
@@ -20,7 +20,7 @@ Medusa.LangFr = {
     -------------------------------------------------------------------------------------------------
     -- Trial: Cloudrest --
     -------------------------------------------------------------------------------------------------
-    Settings_Cloudrest = "Pas de la nuée",
+    Settings_Cloudrest = "Le Pas-des-nuées",
     Settings_Cloudrest_Tooltips = "Vous permet de changer les paramètres du pas de la nuée",
     Settings_Cloudrest_EndBoss1 = "Z'Maja",
     Settings_Cloudrest_Kite = "Kite- Ombres Ecrasante",
