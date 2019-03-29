@@ -1,58 +1,8 @@
 Medusa = Medusa or {}
 
-Medusa.CloudrestNew = {
-    name = "MedusaCloudrestZMaja",
-    combatStart = 0,
-    debugData = {},
-    Color = {
-        Portal = { r = 26, g = 35, b = 126 },
-        BigPortal = {
-            main = { r = 40, g = 53, b = 147 },
-            lines = { r = 95, g = 95, b = 196 },
-            explode = { r = 255, g = 95, b = 82 },
-        },
-        Kite = { r = 74, g = 20, b = 140 },
-    },
-    default = {
-        -- Default is vCR3
-        firstEvent = 20, -- Orbs or fire
-        secondEvent = 23, -- Orbs or fire
-        settings = {
-            portalFoundOrbs = 0,
-            portalDeliveredOrbs = 0,
-            portalCurrentGroup = 1,
-            portalFirstAppearance = 55,
-            portalNextAppearances = 45,
-            portlStarted = 0,
-            portalTotalTime = 75,
-            kiteFirstEvent = 80,
-            kiteStarted = 0,
-            kitePause = 25,
-            kiteDuration = 10,
-        },
-        abilities = {
-            portalSpwan = 103946, -- Shadow Realm Cast
-            portalClosed = 104792, -- PC Win Shadow Realm
-            portalOrbDropped = 103980, -- Grant Malevolent Core
-            portalOrbDelivered = 104047, -- Shadow Piercer Exit
-            portalPlayerEnterId = {
-                -- Shadow World
-                [108045] = true,
-                [104620] = true, -- @TODO one is for different difficulty
-            },
-            portalPlayerExitId = 105218, -- PC Exit SRealm
-            kiteStart = 105239, -- Crushing Darkness Cas
-        }
-    },
-}
---Medusa.CloudrestData.abilities.portalClosed
--- @TODO Check difficulty and load necessary settings
-Medusa.difficulty = GetCurrentZoneDungeonDifficulty()
-local CLOUDREST_VETERAN_3 = 2
-Medusa.CloudrestData = Medusa.CloudrestNew.default
-
 Medusa.Cloudrest = {
-    name = "MedusaCloudrestZMaja",
+    name        = "MedusaCloudrestZMaja",
+    version     = "1.2.1",
     combatStart = 0,
     debugData = {},
 
@@ -62,8 +12,8 @@ Medusa.Cloudrest = {
         Color = {
             Portal = { r = 26, g = 35, b = 126 },
             BigPortal = {
-                main = { r = 40, g = 53, b = 147 },
-                lines = { r = 95, g = 95, b = 196 },
+                main    = { r = 40, g = 53, b = 147 },
+                lines   = { r = 95, g = 95, b = 196 },
                 explode = { r = 255, g = 95, b = 82 },
             },
             Kite = { r = 74, g = 20, b = 140 },
@@ -77,41 +27,44 @@ Medusa.Cloudrest = {
 
         -- Portals
         Portal = {
-            name = "PortalUpdate",
+            name    = "PortalUpdate",
             bigName = "BigPortalUpdate",
-            abilityId = 103946, -- Shadow Realm Cast
-            closeId = 104792, -- PC Win Shadow Realm
 
-            orbDropped = 103980, -- Grant Malevolent Core
+            abilityId = 103946, -- Shadow Realm Cast
+            closeId   = 104792, -- PC Win Shadow Realm
+
+            orbDropped   = 103980, -- Grant Malevolent Core
             orbDelivered = 104047, -- Shadow Piercer Exit
 
-            playerEnterId = {
-                -- Shadow World
-                [108045] = true,
-                [104620] = true,
-            },
-            playerExitId = 105218, -- PC Exit SRealm
+            playerEnterId = { a = 108045, b = 104620 }, -- Shadow World
+            playerExitId  = 105218, -- PC Exit SRealm
 
-            foundOrbs = 0,
-            deliveredOrbs = 0,
-            currentGroup = 1,
+            foundOrbs       = 0,
+            deliveredOrbs   = 0,
+            currentGroup    = 1,
             firstAppearance = 55,
             nextAppearances = 45,
-            started = 0,
-            totalTime = 75,
+            started         = 0,
+            totalTime       = 75,
         },
 
         -- Kiting
         Kite = {
-            name = "KiteUpdate",
-            started = 0,
+            name      = "KiteUpdate",
+            started   = 0,
             abilityId = 105239, -- Crushing Darkness Cas
-            timer = 25,
-            duration = 10,
+            timer     = 25,
+            duration  = 10,
+
             kiteAppearance = 80,
         },
     }
 }
+
+--Medusa.CloudrestData.abilities.portalOrbDelivered
+-- @TODO Check difficulty and load necessary settings
+Medusa.difficulty = GetCurrentZoneDungeonDifficulty()
+local CLOUDREST_VETERAN_3 = 2
 
 --- MAJOR: Debug data for checking IDs ---
 Medusa.Cloudrest.debugDataName = "ORBS KILL"
@@ -122,9 +75,7 @@ Medusa.Cloudrest.debugData2 = {}
 -- Entry point  --
 -------------------------------------------------------------------------------------------------
 function Medusa.InitCloudrest()
-    if Medusa.difficulty == CLOUDREST_VETERAN_3 then
-        EVENT_MANAGER:RegisterForEvent("BossesChanged", EVENT_BOSSES_CHANGED, Medusa.CloudrestBossesChangedCallbacks)
-
+    if Medusa.difficulty == CLOUDREST_VETERAN_3 or Medusa.savedVariables.showVeteran == false then
         if DoesUnitExist('boss1') and GetUnitName('boss1') == Medusa.Language.Settings_Cloudrest_EndBoss1 then
             Medusa.Cloudrest.combatStart = tonumber(GetTimeStamp())
             EVENT_MANAGER:RegisterForEvent(Medusa.Cloudrest.name, EVENT_COMBAT_EVENT, Medusa.CloudrestCombatCallbacks)
@@ -137,24 +88,16 @@ function Medusa.InitCloudrest()
             if Medusa.savedVariables.kiteShow then
                 KiteWindow:SetHidden(false)
             end
-            EVENT_MANAGER:RegisterForUpdate("PortalUpdate", 100, Medusa.CloudrestShowInitialPortal)
+            EVENT_MANAGER:RegisterForUpdate(Medusa.Cloudrest.settings.Portal.name, 1000, Medusa.CloudrestShowInitialPortal)
 
             -- @TODO: Start with first sphere appearance, add "SOON", when over, reset, when killed
 
             -- @TODO: First event starts in 20 seconds, second 23 (Fire or Orb)
 
             -- @TODO: Show fire bar with timer and name, when up
-        end
-    end
-end
 
--------------------------------------------------------------------------------------------------
--- Cloudrest combat callbacks  --
--------------------------------------------------------------------------------------------------
-function Medusa.CloudrestBossesChangedCallbacks()
-    local boss GetUnitName('boss1')
-    if boss == Medusa.Language.Settings_Cloudrest_EndBoss1 then
-        Medusa.CloudrestData = Medusa.CloudrestNew.default
+            -- @TODO: Show Creeper spawn
+        end
     end
 end
 
@@ -167,25 +110,25 @@ function Medusa.CloudrestCombatCallbacks(_, result, isError, aName, aGraphic, aA
 
     --[[ Switch skills ]] --
     -- Crushing Darkness (Kite)
-    if abilityId == Medusa.CloudrestData.abilities.kiteStart then
+    if abilityId == Medusa.Cloudrest.settings.Kite.abilityId then
         if Medusa.savedVariables.kiteShow then
-            if Medusa.CloudrestData.settings.kiteStarted < 1 then
-                Medusa.CloudrestData.settings.kiteStarted = current
-                EVENT_MANAGER:RegisterForUpdate("KiteStarted", 100, Medusa.CloudrestShowKite)
+            if Medusa.Cloudrest.settings.Kite.started < 1 then
+                Medusa.Cloudrest.settings.Kite.started = current
+                EVENT_MANAGER:RegisterForUpdate(Medusa.Cloudrest.settings.Kite.name, 1000, Medusa.CloudrestShowKite)
             end
         end
         -- Portal spawn (Ongoing timers)
-    elseif abilityId == Medusa.CloudrestData.settings.portalSpawn then
-        Medusa.CloudrestData.settings.portalFoundOrbs = 0
-        Medusa.CloudrestData.settings.portalDeliveredOrbs = 0
-        Medusa.CloudrestData.settings.portlStarted = current
-        EVENT_MANAGER:UnregisterForUpdate("PortalUpdate")
-        EVENT_MANAGER:RegisterForUpdate("PortalUpdate", 100, Medusa.CloudrestShowOngoingPortal)
-        EVENT_MANAGER:RegisterForUpdate("BigPortalUpdate", 100, Medusa.CloudrestShowOngoingBigPortal)
+    elseif abilityId == Medusa.Cloudrest.settings.Portal.abilityId then
+        Medusa.Cloudrest.settings.Portal.foundOrbs     = 0
+        Medusa.Cloudrest.settings.Portal.deliveredOrbs = 0
+        Medusa.Cloudrest.settings.Portal.started = current
+        EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.name)
+        EVENT_MANAGER:RegisterForUpdate(Medusa.Cloudrest.settings.Portal.name, 1000, Medusa.CloudrestShowOngoingPortal)
+        EVENT_MANAGER:RegisterForUpdate(Medusa.Cloudrest.settings.Portal.bigName, 1000, Medusa.CloudrestShowOngoingBigPortal)
         -- Portal close event
-    elseif abilityId == Medusa.CloudrestData.abilities.portalClosed then
-        EVENT_MANAGER:UnregisterForUpdate("PortalUpdate")
-        EVENT_MANAGER:UnregisterForUpdate("BigPortalUpdate")
+    elseif abilityId == Medusa.Cloudrest.settings.Portal.closeId then
+        EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.name)
+        EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.bigName)
         -- Swap group names
         if Medusa.Cloudrest.settings.Portal.currentGroup == 1 then
             Medusa.Cloudrest.settings.Portal.currentGroup = 2
@@ -193,10 +136,11 @@ function Medusa.CloudrestCombatCallbacks(_, result, isError, aName, aGraphic, aA
             Medusa.Cloudrest.settings.Portal.currentGroup = 1
         end
 
-        Medusa.CloudrestData.settings.portlStarted = current
-        EVENT_MANAGER:RegisterForUpdate("PortalUpdate", 100, Medusa.CloudrestShowAdditioanlPortal)
+        Medusa.Cloudrest.settings.Portal.started = current
+        EVENT_MANAGER:RegisterForUpdate(Medusa.Cloudrest.settings.Portal.name, 1000, Medusa.CloudrestShowAdditioanlPortal)
         -- Show on player portal entrance
-    elseif Medusa.Cloudrest.settings.Portal.playerEnterId[abilityId] then
+    elseif abilityId == Medusa.Cloudrest.settings.Portal.playerEnterId.a or
+            abilityId == Medusa.Cloudrest.settings.Portal.playerEnterId.b then
         if (tType == COMBAT_UNIT_TYPE_PLAYER) then
             BigPortalWindow:SetHidden(false)
         end
@@ -207,11 +151,11 @@ function Medusa.CloudrestCombatCallbacks(_, result, isError, aName, aGraphic, aA
         end
         -- Add Orb dropped counter
     elseif abilityId == Medusa.Cloudrest.settings.Portal.orbDropped then
-        Medusa.CloudrestData.settings.portalFoundOrbs = Medusa.CloudrestData.settings.portalFoundOrbs + 1
+        Medusa.Cloudrest.settings.Portal.foundOrbs = Medusa.Cloudrest.settings.Portal.foundOrbs + 1
         PlaySound(SOUNDS.DUEL_START)
         -- Add Orb delivered counter
     elseif abilityId == Medusa.Cloudrest.settings.Portal.orbDelivered and result == 2250 then
-        Medusa.CloudrestData.settings.portalDeliveredOrbs = Medusa.CloudrestData.settings.portalDeliveredOrbs + 1
+        Medusa.Cloudrest.settings.Portal.deliveredOrbs = Medusa.Cloudrest.settings.Portal.deliveredOrbs + 1
     end
 
     --- MAJOR: ORB TEST DEBUG DATA ---
@@ -245,7 +189,7 @@ function Medusa.CloudrestCombatCallbacks(_, result, isError, aName, aGraphic, aA
 end
 
 -------------------------------------------------------------------------------------------------
--- Show initial portal messages --
+--  Show initial portal messages --
 -------------------------------------------------------------------------------------------------
 function Medusa.CloudrestShowInitialPortal()
     local current = tonumber(GetTimeStamp())
@@ -260,6 +204,7 @@ function Medusa.CloudrestShowInitialPortal()
     PortalWindowStatusBar:SetMinMax(0, Medusa.Cloudrest.settings.Portal.firstAppearance)
     PortalWindowStatusBar:SetValue(remaining)
     PortalWindowLabel:SetText("Next portal group " .. currentGroup .. " in")
+--    PortalWindowLabel:SetText(string.format("Next portal group %s in", currentGroup))
     PortalWindowLabelTime:SetText(remainString)
     PortalWindow:SetHidden(false)
 
@@ -269,7 +214,7 @@ function Medusa.CloudrestShowInitialPortal()
         PortalWindowStatusBar:SetValue(1)
         PortalWindowLabel:SetText("Portal soon")
         PortalWindowLabelTime:SetText("")
-        EVENT_MANAGER:UnregisterForUpdate("PortalUpdate")
+        EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.name)
 
         -- Swap groups at end
         if Medusa.Cloudrest.settings.Portal.currentGroup == 1 then
@@ -280,13 +225,14 @@ function Medusa.CloudrestShowInitialPortal()
     end
 end
 
+
 -------------------------------------------------------------------------------------------------
--- Show ongoing portal messages --
+--  Show ongoing portal messages --
 -------------------------------------------------------------------------------------------------
 function Medusa.CloudrestShowOngoingPortal()
     local current = tonumber(GetTimeStamp())
 
-    local endtime = Medusa.CloudrestData.settings.portlStarted + Medusa.Cloudrest.settings.Portal.totalTime
+    local endtime = Medusa.Cloudrest.settings.Portal.started + Medusa.Cloudrest.settings.Portal.totalTime
     local remaining = endtime - current
     local remainString = Medusa.SecondsToMinutes(remaining)
 
@@ -301,18 +247,19 @@ function Medusa.CloudrestShowOngoingPortal()
 
     -- Exit and stop, when timer runs out
     if remaining < 1 then
-        EVENT_MANAGER:UnregisterForUpdate("PortalUpdate")
+        EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.name)
         BigPortalWindow:SetHidden(true)
     end
 end
 
+
 -------------------------------------------------------------------------------------------------
--- Show ongoing big portal messages --
+--  Show ongoing big portal messages --
 -------------------------------------------------------------------------------------------------
 function Medusa.CloudrestShowOngoingBigPortal()
     local current = tonumber(GetTimeStamp())
 
-    local endtime = Medusa.CloudrestData.settings.portlStarted + Medusa.Cloudrest.settings.Portal.totalTime
+    local endtime = Medusa.Cloudrest.settings.Portal.started + Medusa.Cloudrest.settings.Portal.totalTime
     local remaining = endtime - current
     local remainString = Medusa.SecondsToMinutes(remaining)
 
@@ -323,7 +270,7 @@ function Medusa.CloudrestShowOngoingBigPortal()
     BigPortalWindowStatusBar:SetValue(remaining)
     BigPortalWindowLabelTime:SetText(remainString)
 
-    local orbs = Medusa.CloudrestData.settings.portalFoundOrbs .. "/" .. Medusa.CloudrestData.settings.portalDeliveredOrbs
+    local orbs = Medusa.Cloudrest.settings.Portal.foundOrbs .. "/" .. Medusa.Cloudrest.settings.Portal.deliveredOrbs
     BigPortalWindowOrbs:SetText(orbs)
 
     BigPortalWindowLabelTime:SetText(remainString)
@@ -331,17 +278,17 @@ function Medusa.CloudrestShowOngoingBigPortal()
 
     -- Exit and stop, when timer runs out
     if remaining < 1 then
-        EVENT_MANAGER:UnregisterForUpdate("BigPortalUpdate")
+        EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.bigName)
         BigPortalWindow:SetHidden(true)
     end
 end
 
 -------------------------------------------------------------------------------------------------
--- Show additional portal messages --
+--  Show additional portal messages --
 -------------------------------------------------------------------------------------------------
 function Medusa.CloudrestShowAdditioanlPortal()
     local current = tonumber(GetTimeStamp())
-    local endtime = Medusa.CloudrestData.settings.portlStarted + Medusa.Cloudrest.settings.Portal.nextAppearances
+    local endtime = Medusa.Cloudrest.settings.Portal.started + Medusa.Cloudrest.settings.Portal.nextAppearances
     local remaining = endtime - current
     local remainString = Medusa.SecondsToMinutes(remaining)
     local currentGroup = Medusa.Cloudrest.settings.Portal.currentGroup
@@ -361,20 +308,20 @@ function Medusa.CloudrestShowAdditioanlPortal()
         PortalWindowStatusBar:SetValue(1)
         PortalWindowLabel:SetText("Portal soon")
         PortalWindowLabelTime:SetText("")
-        EVENT_MANAGER:UnregisterForUpdate("PortalUpdate")
+        EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Portal.name)
     end
 end
 
 -------------------------------------------------------------------------------------------------
--- Show portal messages --
+--  Show portal messages --
 -------------------------------------------------------------------------------------------------
 function Medusa.CloudrestShowKite()
     local current = tonumber(GetTimeStamp())
-    local endtime = Medusa.CloudrestData.settings.kiteStarted + Medusa.Cloudrest.settings.Kite.timer
+    local endtime = Medusa.Cloudrest.settings.Kite.started + Medusa.Cloudrest.settings.Kite.timer
     local remaining = endtime - current
 
     local k = Medusa.Cloudrest.settings.Color.Kite
-    local kiteTime = Medusa.CloudrestData.settings.kiteStarted - current + Medusa.Cloudrest.settings.Kite.duration
+    local kiteTime = Medusa.Cloudrest.settings.Kite.started - current + Medusa.Cloudrest.settings.Kite.duration
     if kiteTime > 0 then
         local remainString = Medusa.SecondsToMinutes(kiteTime)
         KiteWindowStatusBar:SetMinMax(0, Medusa.Cloudrest.settings.Kite.duration)
@@ -395,12 +342,12 @@ function Medusa.CloudrestShowKite()
 
     -- Exit and stop, when timer runs out
     if remaining < 1 then
-        Medusa.CloudrestData.settings.kiteStarted = 0
+        Medusa.Cloudrest.settings.Kite.started = 0
         KiteWindowStatusBar:SetMinMax(0, 1)
         KiteWindowStatusBar:SetValue(1)
         KiteWindowLabel:SetText("Crushing Darkness soon")
         KiteWindowLabelTime:SetText("")
-        EVENT_MANAGER:UnregisterForUpdate("KiteStarted")
+        EVENT_MANAGER:UnregisterForUpdate(Medusa.Cloudrest.settings.Kite.name)
     end
 end
 
@@ -470,10 +417,10 @@ end
 -- Hides all windows  --
 -------------------------------------------------------------------------------------------------
 function Medusa.Cloudrest.Reset()
-    Medusa.Cloudrest.settings.Portal.currentGroup = 1
-    Medusa.CloudrestData.settings.portalFoundOrbs = 0
-    Medusa.CloudrestData.settings.portalDeliveredOrbs = 0
-    Medusa.CloudrestData.settings.kiteStarted = 0
+    Medusa.Cloudrest.settings.Portal.currentGroup  = 1
+    Medusa.Cloudrest.settings.Portal.foundOrbs     = 0
+    Medusa.Cloudrest.settings.Portal.deliveredOrbs = 0
+    Medusa.Cloudrest.settings.Kite.started = 0
     PortalWindowLabel:SetText("Portal soon")
     PortalWindowStatusBar:SetMinMax(0, 1)
     PortalWindowStatusBar:SetValue(1)

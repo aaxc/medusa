@@ -62,6 +62,11 @@ function Medusa:Initialize()
     -- Load saved savedVariables
     Medusa.savedVariables = ZO_SavedVars:NewAccountWide("MedusaVars", Medusa.variableVersion, nil, Medusa.Default)
 
+    -- Set default value
+    if Medusa.savedVariables.showVeteran ~= false then
+        Medusa.savedVariables.showVeteran = true
+    end
+
     -- Adds settings menu
     Medusa.CreateSettingsWindow()
 
@@ -151,9 +156,8 @@ function Medusa.StopAllCombatEvents()
 
     -- Stop events
     EVENT_MANAGER:UnregisterForUpdate("PortalUpdate")
-    EVENT_MANAGER:UnregisterForUpdate("BigPortalUpdate")
     EVENT_MANAGER:UnregisterForUpdate("KiteStarted")
-    EVENT_MANAGER:UnregisterForEvent(Medusa.Cloudrest.name)
+    EVENT_MANAGER:UnregisterForEvent("MedusaCloudrestZMaja")
     EVENT_MANAGER:UnregisterForEvent("BossesChanged")
 end
 
@@ -231,7 +235,6 @@ function Medusa.CreateSettingsWindow()
     }
     local cntrlOptionsPanel = LAM2:RegisterAddonPanel("Aaxc_Medusa", panelData)
 
-    -- @TODO Load Language strings !!!!!
     -- @TODO Move this into settins LUA for easier reading
 
     local optionsData = {
@@ -249,6 +252,16 @@ function Medusa.CreateSettingsWindow()
                 Medusa.BreakShowBars(not newValue)
                 Medusa.CloudrestShowBars(not newValue)
                 Medusa.CloudrestUnLockBars(not newValue)
+            end,
+        },
+        {
+            type = "checkbox",
+            name = Medusa.Language.Settings_General_ShowVeteran,
+            tooltip = Medusa.Language.Settings_General_ShowVeteran_Tooltip,
+            default = true,
+            getFunc = function() return Medusa.savedVariables.showVeteran end,
+            setFunc = function(newValue)
+                Medusa.savedVariables.showVeteran = newValue
             end,
         },
         {

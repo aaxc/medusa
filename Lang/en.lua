@@ -6,8 +6,10 @@ Medusa.LangEn = {
     -- General --
     -------------------------------------------------------------------------------------------------
     Settings_General_Header = "General",
-    Settings_General_LockBar = "Locks Bars",
+    Settings_General_LockBar = "Lock Bars",
     Settings_General_LockBar_Tooltip = "When OFF, bars are shown and unlocked and can be dragged around",
+    Settings_General_ShowVeteran = "Show only in veteran",
+    Settings_General_ShowVeteran_Tooltip = "When OFF, the addon will activate also in normal cloudrest",
     Settings_General_Trials = "Trials",
     Settings_General_Trials_Description = "Here you can configure different trial settings. What you want or don't want to see and what size bars and colors you want to see.",
     Settings_General_Width = "Width",
@@ -26,4 +28,8 @@ Medusa.LangEn = {
     Settings_Cloudrest_Kite = "Kite - Crushing Darkness",
     Settings_Cloudrest_Kite_Show = "Show Kite Bar",
     Settings_Cloudrest_Kite_Show_Tooltip = "When ON, the Kite bar will be shown and can be adjusted",
+    Events_Cloudrest_Next_Portal = "Next portal group %s in",
+
 }
+
+
